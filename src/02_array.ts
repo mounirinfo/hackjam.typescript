@@ -8,191 +8,145 @@
 // 2. How to use generic types (<T>).
 // 3. How to use default and optional parameters.
 
-// ## Array functions
-
-/**
- * ### chunk
- * chunk creates an array of elements split into groups the length of size. If
- * array can't be split evenly, the final chunk will be the remaining elements.
- * Two-dimensional arrays can be expressed using the T[][].
- *
- *  ## Examples
- *  _.chunk(["a", "b", "c", "d"], 2) => [["a", "b"], ["c", "d"]]
- *  _.chunk(["a", "b", "c", "d"], 3) => [["a", "b", "c"], ["d"]]
- *  _.chunk(["a", "b", "c"]) => [["a"], ["b"], ["c"]]
- * */
-export function chunk() {
+// ### chunk
+// chunk creates an array of elements split into groups the length of size. If
+// array can't be split evenly, the final chunk will be the remaining elements.
+// Two-dimensional arrays can be expressed using the T[][].
+export function chunk<T>(collection: Array<T>, size: number = 1): T[][] {
+  const result: T[][] = new Array(Math.ceil(collection.length / size));
+  for (let i = 0; i < result.length; i++) {
+    result[i] = collection.slice(i * size, (i + 1) * size);
+  }
+  return result;
 }
 
-/**
- * ### compact
- * compact accepts an array as an argument and returns an array.
- * The returned array does not contain falsey values (such as 0, null,
- * undefined, NaN).
- *
- * ## Examples
- * _.compact([1, undefined, 2, undefined, 3]) => [1, 2, 3]
- * _.compact([1, NaN, 2, NaN, 3]) => [1, 2, 3]
- * _.compact([1, null, 2, null, 3]) => [1, 2, 3]
- * _.compact([1, 0, 2, 0, 3]) => [1, 2, 3]
- * _.compact([1, undefined, NaN, null, 0, 2, 3]) => [1, 2, 3]
- */
-export function compact() {
+
+// ### compact
+// compact accepts an array as an argument and returns an array.
+// The returned array does not contain falsey values (such as 0, null,
+// undefined, NaN).
+export function compact(collection: Array<any>): Array<any> {
+  //return collection.filter(v => !!v);
+  return collection.filter(Boolean);
 }
 
-/**
- * ### head
- * head takes in an array and returns its first item.
- *
- *  ## Examples
- *  _.head([1, 2, 3]) => 1
- *  _.head([]) => undefined
- */
-export function head() {
+// ### head
+// head takes in an array and returns its first item.
+export function head<T>([first]: T[]): T {
+  return first;
 }
 
-/**
- * ### initial
- * initial returns a slice of the passed in array, excluding its last item.
- *
- * ## Examples
- *  _.initial<number>([1, 2, 3]) => [1, 2]
- *
- */
-export function initial() {
+// ### initial
+// initial returns a slice of the passed in array, excluding its last item.
+export function initial<T>(collection: Array<T>): Array<T> {
+  return collection.slice(0, -1);
 }
 
-/**
- * ### last
- * last takes in an array and returns its last item.
- *
- * ## Examples
- * _.last([1, 2, 3]) => 3
- * _.last([]) => undefined
- *
- */
-export function last() {
+// ### last
+// last takes in an array and returns its last item.
+export function last<T>(collection: Array<T>): T {
+  return collection[collection.length - 1];
 }
 
-/**
- * ### drop
- * drop takes in two arguments, an array and a count, and returns an array that
- * has count items removed from the beginning.
- * The count should be optional and default to 1.
- *
- * ## Examples
- * _.drop([1, 2, 3, 4], 2) => [3, 4]
- * _.drop([1, 2, 3, 4]) => [2, 3, 4]
- */
-export function drop() {
+// ### drop
+// drop takes in two arguments, an array and a count, and returns an array that
+// has count items removed from the beginning.
+// The count should be optional and default to 1.
+export function drop<T>(collection: Array<T>, count: number = 1): Array<T> {
+  return collection.slice(count);
 }
 
-/**
- * ### dropRight
- * dropRight works like drop, except that it removes items from the end of the
- * passed in array.
- *
- * ## Examples
- * _.dropRight([1, 2, 3, 4], 2) => [1, 2]
- * _.dropRight([1, 2, 3, 4]) => [1, 2, 3]
- *
- */
-export function dropRight() {
+// ### dropRight
+// dropRight works like drop, except that it removes items from the end of the 
+// passed in array.
+export function dropRight<T>(collection: Array<T>, count: number = 1): Array<T> {
+  return collection.slice(0, collection.length - count);
 }
 
 interface DropWhilePredicate<T> {
   (value?: T, index?: number, collection?: Array<T>): boolean;
 }
-/**
-* ### dropWhile
-* dropWhile works similar to drop. It removes items from the beginning of the
-* array until the predicate returns false.
-*
-* ## Examples
-* _.dropWhile([1, 2, 3, 4, 5, 1], value => value < 3) => [3, 4, 5, 1]
-*
-*/
+
+// ### dropWhile
+// dropWhile works similar to drop. It removes items from the beginning of the
+// array until the predicate returns false.
 export function dropWhile<T>(collection: Array<T>, predicate: DropWhilePredicate<T>): Array<T> {
+  let index = 0;
+  while (index < collection.length && predicate(collection[index], index, collection)) {
+    index++;
+  }
+  return collection.slice(index);
 }
 
-/**
- * ### dropRightWhile
- * dropRightWhile works similar to dropWhile, except that it iterates over the
- * passed in array in reversed order.
- *
- * ## Examples
- * _.dropRightWhile([5, 4, 3, 2, 1], value => value < 3) => [5, 4, 3]
- *
- */
-export function dropRightWhile() {
+// ### dropRightWhile
+// dropRightWhile works similar to dropWhile, except that it iterates over the
+// passed in array in reversed order.
+export function dropRightWhile<T>(collection: Array<T>, predicate: DropWhilePredicate<T>): Array<T> {
+  let index = collection.length - 1;
+  while (index >= 0 && predicate(collection[index], index, collection)) {
+    index--;
+  }
+  return collection.slice(0, index + 1);
 }
 
-/**
- * ### fill
- * fill mutates the passed in array. It fills collection[start] up to
- * collection[end] with a specified value.
- *
- * ## Examples
- * _.fill<any>([4, 6, 8, 10], "* ", 1, 3) => [4, "* ", "* ", 10]
- */
-export function fill() {
+// ### fill
+// fill mutates the passed in array. It fills collection[start] up to
+// collection[end] with a specified value.
+export function fill<T>(collection: Array<T>, value: T, start: number = 0, end: number = collection.length): Array<T> {
+  for (let i = start; i < end; i++) {
+    collection[i] = value;
+  }
+  return collection;
 }
 
 // Here we define an interface for the predicate used in the findIndex function.
-export interface FindIndexPredicate {
+export interface FindIndexPredicate<T> {
+  (value?: T, index?: number, collection?: Array<T>): boolean;
 }
 
-/**
- * ### findIndex
- * findIndex accepts three arguments:
- * 1. The array to be traversed.
- * 2. An iteratee function.
- * 3. The index from where we should start traversing the array.
- *
- * ## Examples
- * _.findIndex([4, 6, 8, 10], () => false) => -1
- * _.findIndex([4, 6, 8, 10], value => value === 6) => 1
- * _.findIndex([4, 6, 6, 8, 10], value => value === 6, 2) => 2
- *
- */
-export function findIndex() {
+// ### findIndex
+// findIndex accepts three arguments:
+// 1. The array to be traversed.
+// 2. An iteratee function.
+// 3. The index from where we should start traversing the array.
+export function findIndex<T>(collection: Array<T>, predicate: FindIndexPredicate<T>, fromIndex: number = 0): number {
+  for (let i = fromIndex; i < collection.length; i++) {
+    if (predicate(collection[i], i, collection)) {
+      return i;
+    }
+  }
+  return -1;
+}
+// ### findLastIndex
+// findLastIndex works line findIndex, but traverses the collection backwards.
+// The third argument is the index from where we start traversing the array.
+export function findLastIndex<T>(collection: Array<T>, predicate: FindIndexPredicate<T>, fromIndex: number = collection.length - 1): number {
+  for (let i = fromIndex; i > 0; i--) {
+    if (predicate(collection[i], i, collection)) {
+      return i;
+    }
+  }
+  return -1;
 }
 
-/**
- * ### findLastIndex
- * findLastIndex works line findIndex, but traverses the collection backwards.
- * The third argument is the index from where we start traversing the array.
- *
- * ## Examples
- * _.findLastIndex([4, 6, 8, 10], () => false) => -1
- * _.findLastIndex([4, 6, 8, 10], value => value === 6) => 1
- * _.findLastIndex([4, 6, 8, 6, 10], value => value === 6) => 3
- * _.findLastIndex([4, 6, 6, 8, 10], value => value === 6, 1) => 1
- *
- */
-export function findLastIndex() {
+// ### nth
+// Given an array, should return the nth item of the passed in array.
+export function nth<T>(array: Array<T>, n: number = 0): T {
+  return array[n];
 }
 
-/**
- * ### nth
- * Given an array, should return the nth item of the passed in array.
- *
- * ## Examples
- * _.nth<number>([1, 2, 3], 0) => 1
- * _.nth<number>([1, 2, 3], 1) => 2
- * _.nth<number>([1, 2, 3], 2) => 3
- * _.nth<number>([1, 2, 3]) => 1
- *
- */
-export function nth() {
-}
+// ### zip
+export function zip<T>(...arrays: Array<T>[]): T[][] {
+  const lengths = arrays.map(({ length }) => length);
+  const size = Math.max(...lengths);
+  const results = [];
 
-/**
- * ### zip
- *
- * ## Examples
- * // We can also use something called "union types" here.
- * _.zip<string | number | boolean>(["a", "b"], [1, 2], [true, false]) => [["a", 1, true], ["b", 2, false]]
- */
-export function zip() {
+  for (let i = 0; i < size; i++) {
+    results[i] = [];
+    for (let j = 0; j < arrays.length; j++) {
+      results[i].push(arrays[j][i]);
+    }
+  }
+
+  return results;
 }

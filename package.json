@@ -1,8 +1,8 @@
 {
-  "name": "typescript.koans",
+  "name": "hackday.typescript",
   "version": "1.0.0",
   "description": "learn TypeScript the right way",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "pretest": "npm install",
     "prestart": "npm install",
@@ -19,14 +19,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hackages/typescript.koans.git"
+    "url": "git+https://github.com/hackages/hackday.typescript.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/hackages/typescript.koans/issues"
+    "url": "https://github.com/hackages/hackday.typescript/issues"
   },
-  "homepage": "https://github.com/hackages/typescript.koans#readme",
+  "homepage": "https://github.com/hackages/hackday.typescript#readme",
   "devDependencies": {
     "@types/chai": "^3.4.34",
     "@types/mocha": "^2.2.32",
@@ -41,7 +41,7 @@
     "ts-node-warnings": "^1.6.0",
     "tslint": "^3.15.1",
     "tslint-stylish": "^2.1.0-beta",
-    "typescript": "^2.0.3",
+    "typescript": "^2.6.1",
     "watch": "^1.0.1",
     "webpack": "^1.13.3"
   }

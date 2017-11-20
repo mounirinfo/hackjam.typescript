@@ -6,7 +6,7 @@
 // This first example shows you how to prevent someone from
 // calling this function with something else than numbers
 // Nothing to do here
-export function addNumbers(x: number, y: number): number {
+function addNumbers(x: number, y: number): number {
   return x + y;
 }
 
@@ -15,7 +15,7 @@ export function addNumbers(x: number, y: number): number {
 // both strings and numbers, the goal of this function is to add strings.
 // By enforcing this in the function signature, we can safely change
 // its implementation later
-export function addStrings(x, y) {
+function addStrings(x, y) {
   return x + y;
 }
 
@@ -35,7 +35,7 @@ export function addStrings(x, y) {
 // This function can accept any type!
 // But it always returns something of the same type as what was provided.
 // Hint: Use a generic type (<T>).
-export function identity(item) {
+function identity(item) {
   return item;
 }
 
@@ -43,7 +43,7 @@ export function identity(item) {
 // attempt applies the passed in function with the supplied arguments. If the
 // function throws an error, the error is being returned. If the function does
 // not throw an error, the result is being returned.
-export function attempt(func, ...args) {
+function attempt(func, ...args) {
   try {
     return func(...args);
   } catch(err) {
@@ -53,7 +53,7 @@ export function attempt(func, ...args) {
 
 // ### constant
 // constant returns a function that returns a the passed in value.
-export function constant(value) {
+function constant(value) {
   return function() {
     return value;
   }
@@ -62,12 +62,12 @@ export function constant(value) {
 // ### noop
 // noop can be called with arbitrary arguments, it will always return
 // `undefined`.
-export function noop() {}
+function noop() {}
 
 // ### times
 // times invokes the passed in iteratee (2nd argument) n times. It returns an
 // array of results.
-export function times(n, iteratee) {
+function times(n, iteratee) {
   // If the fill function doesn't exist then implement it...
   return Array(n).fill().map((o, i) => iteratee(i));
 }

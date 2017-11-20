@@ -12,13 +12,38 @@
 // chunk creates an array of elements split into groups the length of size. If
 // array can't be split evenly, the final chunk will be the remaining elements.
 // Two-dimensional arrays can be expressed using the T[][].
-export function chunk<T>(collection: Array<T>, size: number = 1): T[][] {
-  const result: T[][] = new Array(Math.ceil(collection.length / size));
-  for (let i = 0; i < result.length; i++) {
-    result[i] = collection.slice(i * size, (i + 1) * size);
-  }
-  return result;
+function chunk<T>(collection: Array<T>, size: number = 1): T[][] {
+
+  // const result: T[][] = new Array(Math.ceil(collection.length / size));
+
+  // for (let i = 0; i < result.length; i++) {
+  //   console.log(i*size)
+  //   result[i] = collection.slice(i * size, (i+1) *(size));
+  //   console.log(result);
+    
+  // }
+  // return result;
+  return collection
+    .reduce((acc, item, i)=>[...acc, (collection.slice(i * size, (i+1) *(size)))], [])
+    .filter(item => item.length > 0);
 }
+const res = chunk([1, 0,2,3,4, 56, 57], 3).reduce((acc, item) => [...acc, item.length], [])
+console.log(res);
+
+const double = ([first, ...tail]:number[]) => {
+  if(tail.length === 0) return [];
+  return [first*2, ...double(tail)];
+}
+
+ const arr = [1,2,3, 12, 13,15];
+ arr[1];
+ const [first, ...tail] = arr;
+ console.log(double(arr))
+ 
+ const arr2 = [...arr, ...arr]
+ console.log(arr2);
+ 
+
 
 
 // ### compact
@@ -33,8 +58,9 @@ export function compact(collection: Array<any>): Array<any> {
 // ### head
 // head takes in an array and returns its first item.
 export function head<T>([first]: T[]): T {
-  return first;
+  return first
 }
+
 
 // ### initial
 // initial returns a slice of the passed in array, excluding its last item.

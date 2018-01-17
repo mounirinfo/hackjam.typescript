@@ -3,7 +3,7 @@
 In this set of examples and tests we cover typescript concepts by building a simple and lighter version of Lodash
 
 ### Quick start
-**Make sure you have Node version >= 6.0 and NPM >= 3**
+**Make sure you have Node version >= 8.0 and NPM >= 5**
 
 > Clone/Download the repo then edit `*.spec.js` files inside [`/test/`](/test/)
 
@@ -11,7 +11,7 @@ In this set of examples and tests we cover typescript concepts by building a sim
 
 ```bash
 # clone our repo
-git clone https://github.com/hackages/hackday.typescript.git
+git clone https://github.com/hackages/hackjam.typescript.git
 
 # change directory to our repo
 cd hackday.typescript
@@ -35,10 +35,10 @@ go to [http://localhost:8080](http://localhost:8080) in your browser
 > To take full advantage of TypeScript with autocomplete you would have to install it globally and use an editor with the correct TypeScript plugins.
 
 #### Use latest TypeScript compiler
-TypeScript 2.1.x includes everything you need. Make sure to upgrade, even if you installed TypeScript previously.
+TypeScript 2.6.x includes everything you need. Make sure to upgrade, even if you installed TypeScript previously.
 
 ```
-npm install --global typescript
+npm install --global typescript@latest
 ```
 
 #### Use a TypeScript-aware editor

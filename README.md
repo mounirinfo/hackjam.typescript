@@ -3,7 +3,7 @@
 In this set of examples and tests we cover typescript concepts by building a simple and lighter version of Lodash
 
 ### Quick start
-**Make sure you have Node version >= 8.0 and NPM >= 5**
+**Make sure you have Node version >= 8.0 and NPM >= 5 or Yarn**
 
 > Clone/Download the repo then edit `*.spec.js` files inside [`/test/`](/test/)
 

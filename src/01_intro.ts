@@ -6,7 +6,7 @@
 // This first example shows you how to prevent someone from
 // calling this function with something else than numbers
 // Nothing to do here
-function addNumbers(x: number, y: number): number {
+export function addNumbers(x: number, y: number): number {
   return x + y;
 }
 
@@ -15,7 +15,7 @@ function addNumbers(x: number, y: number): number {
 // both strings and numbers, the goal of this function is to add strings.
 // By enforcing this in the function signature, we can safely change
 // its implementation later
-function addStrings(x, y) {
+export function addStrings(x, y) {
   return x + y;
 }
 

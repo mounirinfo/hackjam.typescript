@@ -35,12 +35,12 @@ const double = ([first, ...tail]:number[]) => {
   return [first*2, ...double(tail)];
 }
 
- const arr = [1,2,3, 12, 13,15];
+ const arr: number[] = [1,2,3, 12, 13,15];
  arr[1];
  const [first, ...tail] = arr;
  console.log(double(arr))
  
- const arr2 = [...arr, ...arr]
+ const arr2: number[] = [...arr, ...arr]
  console.log(arr2);
  
 
